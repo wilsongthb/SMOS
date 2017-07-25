@@ -1,0 +1,19 @@
+{
+  "name": "smos",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.6.5",
+    "angular-google-maps": "^2.4.1",
+    "baseguide": "^2.0.0",
+    "express": "^4.15.3",
+    "mysql-to-rest": "^1.0.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
