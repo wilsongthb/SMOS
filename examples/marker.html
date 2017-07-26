@@ -12,17 +12,31 @@
     <h3>My Google Maps Demo</h3>
     <div id="map"></div>
     <script>
+      var markers = []
       var marker
+      var map
       function initMap() {
         var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
           center: uluru
         });
 
         map.addListener('click', function(e) {
           console.log('hola', e)
+          markers.push(new google.maps.Marker({
+            draggable: true,
+            position: {
+              lat: e.latLng.lat(),
+              lng: e.latLng.lng()
+            },
+            map: map
+          }))
+          console.log(markers)
+          console.log('hh')
         })
+
+        
         // var marker = new google.maps.Marker({
         marker = new google.maps.Marker({
           draggable: true,

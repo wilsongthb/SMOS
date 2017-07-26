@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SMOS</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="./node_modules/baseguide/dist/css/baseguide.css">
+        <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        </style>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div ng-app="smos">
+            <button><a href="/">/</a></button>
+            <button><a href="#!/map">map</a></button>
+            <ng-view></ng-view>
+        </div>
+
+        <script src="./node_modules/angular/angular.js"></script>
+        <script src="./node_modules/angular-route/angular-route.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCi6ym6B803LzM6Aaug0yC0zmI23q8S_9E"></script>
+        <!-- <script src="./node_modules/angular-google-maps/dist/angular-google-maps.js"></script> -->
+        <script src="./js/config.js"></script>
+        <script src="./js/__init.js"></script>
+        <script src="./js/mapController.js"></script>
+    </body>
+</html>

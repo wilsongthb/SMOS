@@ -1,0 +1,34 @@
+<div class="section">
+    <div class="container">
+        <h4>MAPA</h4>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-6">
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Latitud</th>
+                        <th>Longitud</th>
+                        <th>Tipo</th>
+                    </tr>
+                    <tr ng-repeat="m in markers">
+                        <td ng-bind="m.id"></td>
+                        <td ng-bind="m.name"></td>
+                        <td ng-bind="m.lat"></td>
+                        <!-- <td ng-bind="getLat(m.id)"></td> -->
+                        <td ng-bind="m.lng"></td>
+                        <!-- <td ng-bind="getLng(m.id)"></td> -->
+                        <td ng-bind="m.type"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col col-xs-6">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+</div>
