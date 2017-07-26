@@ -6,7 +6,7 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col col-xs-6">
+            <div class="col col-xs-8">
                 <table class="table">
                     <tr>
                         <th>ID</th>
@@ -14,19 +14,21 @@
                         <th>Latitud</th>
                         <th>Longitud</th>
                         <th>Tipo</th>
+                        <th></th>
                     </tr>
-                    <tr ng-repeat="m in markers">
+                    <tr ng-repeat="m in markers track by $index">
                         <td ng-bind="m.id"></td>
                         <td ng-bind="m.name"></td>
-                        <td ng-bind="m.lat"></td>
-                        <!-- <td ng-bind="getLat(m.id)"></td> -->
-                        <td ng-bind="m.lng"></td>
-                        <!-- <td ng-bind="getLng(m.id)"></td> -->
+                         <td ng-bind="getLat(m.id)"></td> 
+                         <td ng-bind="getLng(m.id)"></td> 
                         <td ng-bind="m.type"></td>
+                        <td>
+                            <button title="Eliminar" ng-click="eliminar($index)">x</button>
+                        </td>
                     </tr>
                 </table>
             </div>
-            <div class="col col-xs-6">
+            <div class="col col-xs-4">
                 <div id="map"></div>
             </div>
         </div>

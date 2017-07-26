@@ -5,18 +5,22 @@ var markers = []
 app.controller('map', function($scope, $http){
     // methods
     $scope.getLat = function(id){
-        if(markers[id])
-            return markers[id].getPosition().lat()
+        if($scope.db.historial[id])
+            return $scope.db.historial[id][$scope.db.historial[id].length-1].lat
     }
     $scope.getLng = function(id){
-        if(markers[id])
-            return markers[id].getPosition().lng()
+        if($scope.db.historial[id])
+            return $scope.db.historial[id][$scope.db.historial[id].length-1].lng
+    }
+    $scope.getLastHistory = function(id){
+        if($scope.db.historial[id])
+            return $scope.db.historial[id]
     }
     $scope.setLatLng = function(id, lat, lng){
-        console.warn(
-            arguments,
-            $scope.markers
-        )
+        // console.warn(
+        //     arguments,
+        //     $scope.markers
+        // )
         // $scope.markers[id].lat = lat
         // $scope.markers[id].lng = lng
     }
@@ -32,7 +36,29 @@ app.controller('map', function($scope, $http){
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 6,
         center: uluru
-    });
+    })
+    map.addListener('click', function(e){
+        
+        let mark = {
+            id: $scope.markers.length,
+            name: "",
+            type: ""
+        }
+        $scope.db.markers.push(mark)
+
+        // console.log(
+        //     e,
+        //     mark
+        // )
+        $scope.db.historial[mark.id] = []
+        $scope.db.historial[mark.id].push({
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng(),
+            time: new Date()
+        })
+
+        $scope.guardar()
+    })
 
     // marcadores
     // obtener marcadores
@@ -40,9 +66,13 @@ app.controller('map', function($scope, $http){
         $http.post(`${config.urlApi}/db`, $scope.db).then(
             // success
             function(){
-                // $scope.leer()
+                $scope.leer()
             }
         )
+    }
+    $scope.eliminar = function(id){
+        $scope.db.markers.splice(id, 1)
+        $scope.guardar()
     }
     $scope.leer = function(){
         $http.get(`${config.urlApi}/db`).then(
@@ -64,8 +94,8 @@ app.controller('map', function($scope, $http){
                     markers[marker.id] = new google.maps.Marker({
                         draggable: true,
                         position: {
-                            lat: marker.lat,
-                            lng: marker.lng
+                            lat: $scope.getLat(marker.id),
+                            lng: $scope.getLng(marker.id)
                         },
                         map: map
                     });
@@ -77,10 +107,10 @@ app.controller('map', function($scope, $http){
                         //     $scope.markers[this.markers_id],
                         //     $scope.leer,
                         // )
-                        console.warn(
-                            this.markers_id,
-                            $scope.markers
-                        )
+                        // console.warn(
+                        //     this.markers_id,
+                        //     $scope.markers
+                        // )
                         
                         //GUARDAR CAMBIOS
                         // marker.lat = this.getPosition().lat()
@@ -96,9 +126,17 @@ app.controller('map', function($scope, $http){
                         // marker.name = "poto"
 
                         var m = $scope.markers[this.markers_id]
-                        // m.name = "onon"
-                        m.lat = this.getPosition().lat()
-                        m.lng = this.getPosition().lng()
+                        // GUARDAR HOSTORIAL
+                        if(typeof $scope.db.historial[this.markers_id] === "undefined"){
+                            $scope.db.historial[this.markers_id] = []
+                        }
+                        $scope.db.historial[this.markers_id].push({
+                            lat: this.getPosition().lat(),
+                            lng: this.getPosition().lng(),
+                            time: new Date()
+                        })
+                        // m.lat = this.getPosition().lat()
+                        // m.lng = this.getPosition().lng()
                         $scope.guardar()
                     })
                     // console.log(
