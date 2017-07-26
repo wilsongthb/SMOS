@@ -28,6 +28,7 @@ app.controller('map', function($scope, $http){
     // data
     $scope.db = {}
     $scope.markers = []
+    $scope.marker = {}
 
     // posicion inicial
     var uluru = {lat: -25.363, lng: 131.044};
@@ -38,12 +39,13 @@ app.controller('map', function($scope, $http){
         center: uluru
     })
     map.addListener('click', function(e){
-        
+        // crea nuevos marcadores
         let mark = {
-            id: $scope.markers.length,
+            id: $scope.db.markers.length,
             name: "",
             type: ""
         }
+
         $scope.db.markers.push(mark)
 
         // console.log(
@@ -70,8 +72,12 @@ app.controller('map', function($scope, $http){
             }
         )
     }
+    $scope.editar = function(m){
+        $scope.marker = m
+    }
     $scope.eliminar = function(id){
         $scope.db.markers.splice(id, 1)
+        $scope.db.historial[id] = null
         $scope.guardar()
     }
     $scope.leer = function(){
@@ -81,16 +87,16 @@ app.controller('map', function($scope, $http){
                 // $scope.markers = response.data.markers
                 $scope.db = {}
                 $scope.db = response.data
-                $scope.markers = []
+                // $scope.markers = []
                 // $scope.markers = $scope.db.markers
+
+                // for(i in $scope.db.markers){
+                //     var marker = $scope.db.markers[i]
+                //     $scope.markers[marker.id] = marker
+                // }
 
                 for(i in $scope.db.markers){
                     var marker = $scope.db.markers[i]
-                    $scope.markers[marker.id] = marker
-                }
-
-                for(i in $scope.markers){
-                    var marker = $scope.markers[i]
                     markers[marker.id] = new google.maps.Marker({
                         draggable: true,
                         position: {
@@ -125,7 +131,7 @@ app.controller('map', function($scope, $http){
          
                         // marker.name = "poto"
 
-                        var m = $scope.markers[this.markers_id]
+                        // var m = $scope.db.markers[this.markers_id]
                         // GUARDAR HOSTORIAL
                         if(typeof $scope.db.historial[this.markers_id] === "undefined"){
                             $scope.db.historial[this.markers_id] = []

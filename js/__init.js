@@ -1,6 +1,6 @@
 var app = angular.module('smos', [
     'ngRoute', 
-    // 'uiGmapgoogle-maps'
+    // 'ui.bootstrap'
 ])
 .config(function($routeProvider){
     $routeProvider
@@ -10,5 +10,9 @@ var app = angular.module('smos', [
         .when('/map', {
             templateUrl: 'views/map.html',
             controller: 'map'
+        })
+        .when('/estadisticas', {
+            templateUrl: 'views/estadisticas.html',
+            controller: 'estadisticas'
         })
 })

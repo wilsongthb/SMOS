@@ -2,6 +2,8 @@ const fs = require('fs')
 const express = require('express')
 const app = express()
 var bodyParser = require('body-parser')
+var http = require('http').createServer(app)
+var io = require('socket.io')(http)
 
 app.use(bodyParser.json());
 // Add headers
@@ -45,7 +47,16 @@ app.post('/db', function (req, res, data) {
     res.send("ok")
 })
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
+// app.listen(3000, function () {
+//     console.log('Example app listening on port 3000!')
+// })
+
+io.on('connection', function(socket) {
+    socket.on('update_map', function(msg){
+        io.emit('update_map', msg)
+    })
 })
 
+http.listen(3000, function(){
+    console.log('listen on 3000')
+})

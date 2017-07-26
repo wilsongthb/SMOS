@@ -6,31 +6,50 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col col-xs-8">
+            <div class="col col-xs-12">
+                <div id="map"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-xs-12">
                 <table class="table">
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
+                        <th>Tipo</th>
                         <th>Latitud</th>
                         <th>Longitud</th>
-                        <th>Tipo</th>
+                        
                         <th></th>
                     </tr>
-                    <tr ng-repeat="m in markers track by $index">
+                    <tr ng-repeat="m in db.markers track by $index">
                         <td ng-bind="m.id"></td>
                         <td ng-bind="m.name"></td>
-                         <td ng-bind="getLat(m.id)"></td> 
-                         <td ng-bind="getLng(m.id)"></td> 
                         <td ng-bind="m.type"></td>
+                         <td ng-bind="getLat(m.id)"></td> 
+                         <td ng-bind="getLng(m.id)"></td>
                         <td>
-                            <button title="Eliminar" ng-click="eliminar($index)">x</button>
+                            <button title="Editar" ng-click="editar(m)"><i class="fa fa-pencil"></i></button>
+                            <button title="Eliminar" ng-click="eliminar($index)"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" ng-value="marker.id" disabled>
+                        </td>
+                        <td>
+                            <input type="text" ng-model="marker.name">
+                        </td>
+                        <td>
+                            <input type="text" ng-model="marker.type">
+                        </td>
+                        <td>
+                            <button ng-click="guardar()"><i class="fa fa-floppy-o"></i> Guardar</button>
                         </td>
                     </tr>
                 </table>
             </div>
-            <div class="col col-xs-4">
-                <div id="map"></div>
-            </div>
+            
         </div>
     </div>
 </div>

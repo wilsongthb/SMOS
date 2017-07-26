@@ -8,6 +8,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="./node_modules/baseguide/dist/css/baseguide.css">
+        <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.css">
         <style>
         #map {
             height: 400px;
@@ -24,15 +25,16 @@
     </head>
     <body>
         <div ng-app="smos">
-            <button><a href="/">/</a></button>
-            <button><a href="#!/map">map</a></button>
+            <a href="/"><button>/</button></a>
+            <a href="#!/map"><button>map</button></a>
             <ng-view></ng-view>
         </div>
 
         <script src="./node_modules/angular/angular.js"></script>
         <script src="./node_modules/angular-route/angular-route.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCi6ym6B803LzM6Aaug0yC0zmI23q8S_9E"></script>
-        <!-- <script src="./node_modules/angular-google-maps/dist/angular-google-maps.js"></script> -->
+        <script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
+
         <script src="./js/config.js"></script>
         <script src="./js/__init.js"></script>
         <script src="./js/mapController.js"></script>
