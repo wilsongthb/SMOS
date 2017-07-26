@@ -9,6 +9,10 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="./node_modules/baseguide/dist/css/baseguide.css">
         <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.css">
+        <!-- <link rel="stylesheet" href="./startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/css/bootstrap.css"> -->
+        <link rel="stylesheet" href="./startbootstrap-sb-admin-2-gh-pages/vendor/metisMenu/metisMenu.css">
+        <link rel="stylesheet" href="./startbootstrap-sb-admin-2-gh-pages/dist/css/sb-admin-2.css">
+        <link rel="stylesheet" href="./startbootstrap-sb-admin-2-gh-pages/vendor/morrisjs/morris.css">
         <style>
         #map {
             height: 400px;
@@ -27,6 +31,7 @@
         <div ng-app="smos">
             <a href="/"><button>/</button></a>
             <a href="#!/map"><button>map</button></a>
+            <a href="#!/status"><button>status</button></a>
             <ng-view></ng-view>
         </div>
 
@@ -35,8 +40,16 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCi6ym6B803LzM6Aaug0yC0zmI23q8S_9E"></script>
         <script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
 
+        <script src="./startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.js"></script>
+        <script src="./startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.js"></script>
+        <script src="./startbootstrap-sb-admin-2-gh-pages/vendor/metisMenu/metisMenu.js"></script>
+        <script src="./startbootstrap-sb-admin-2-gh-pages/vendor/raphael/raphael.js"></script>
+        <script src="./startbootstrap-sb-admin-2-gh-pages/vendor/morrisjs/morris.js"></script>
+        <!-- <script src="./startbootstrap-sb-admin-2-gh-pages/data/morris-data.js"></script> -->
+
         <script src="./js/config.js"></script>
         <script src="./js/__init.js"></script>
         <script src="./js/mapController.js"></script>
+        <script src="./js/statusController.js"></script>
     </body>
 </html>

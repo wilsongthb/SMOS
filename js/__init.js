@@ -11,8 +11,8 @@ var app = angular.module('smos', [
             templateUrl: 'views/map.html',
             controller: 'map'
         })
-        .when('/estadisticas', {
-            templateUrl: 'views/estadisticas.html',
-            controller: 'estadisticas'
+        .when('/status', {
+            templateUrl: 'views/status.html',
+            controller: 'status'
         })
 })
