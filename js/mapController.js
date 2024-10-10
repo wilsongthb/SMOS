@@ -44,7 +44,7 @@ app.controller('map', function($scope, $http){
         $scope.db.historial[id] = null
         $scope.guardar()
     }
-    $scope.leer = function(){
+    $scope.leer = function() {
         $http.get(`${config.urlApi}/db`).then(
             // success
             function(response){
@@ -88,35 +88,63 @@ app.controller('map', function($scope, $http){
             }
         )
     }
+    // inicializacion
     
+    // map = new google.maps.Map(document.getElementById('map'), {
+    //     zoom: 6,
+    //     center: uluru
+    // })
+    // let map;
+
+    async function initMap() {
+      // The location of Uluru
+      const position = { lat: -25.344, lng: 131.031 };
+      // Request needed libraries.
+      //@ts-ignore
+      const { Map } = await google.maps.importLibrary("maps");
+      const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+      // The map, centered at Uluru
+      map = new Map(document.getElementById("map"), {
+        zoom: 6,
+        center: uluru,
+        // mapId: "DEMO_MAP_ID",
+      });
+
+      // The marker, positioned at Uluru
+      // const marker = new AdvancedMarkerElement({
+      //   map: map,
+      //   position: position,
+      //   title: "Uluru",
+      // });
+    }
+
+  initMap().then(() => {
+    $scope.leer();
+
+    map.addListener('rightclick', function(e){
+        // crea nuevos marcadores
+        let mark = {
+            id: $scope.db.markers.length,
+            name: "",
+            type: ""
+        }
+
+        $scope.db.markers.push(mark)
+        $scope.db.historial[mark.id] = []
+        $scope.db.historial[mark.id].push({
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng(),
+            time: new Date()
+        })
+
+        $scope.guardar()
+    });
+  });
 
     
-    // INIT
-                // init map
-                map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 6,
-                    center: uluru
-                })
-                map.addListener('rightclick', function(e){
-                    // crea nuevos marcadores
-                    let mark = {
-                        id: $scope.db.markers.length,
-                        name: "",
-                        type: ""
-                    }
-
-                    $scope.db.markers.push(mark)
-                    $scope.db.historial[mark.id] = []
-                    $scope.db.historial[mark.id].push({
-                        lat: e.latLng.lat(),
-                        lng: e.latLng.lng(),
-                        time: new Date()
-                    })
-
-                    $scope.guardar()
-                })
     
-    $scope.leer()
+    // $scope.leer()
 
     // SOCKET IO
     socket = io()

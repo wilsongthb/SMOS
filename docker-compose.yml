@@ -1,0 +1,9 @@
+services:
+  web:
+    image: node:8
+    volumes:
+      - ./:/code/
+    ports:
+      - "3000:3000"
+    working_dir: /code/
+    command: sh -c "node server.js"
